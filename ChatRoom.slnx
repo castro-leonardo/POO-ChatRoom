@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ChatRoom/ChatRoom.csproj" Id="8e6e6d85-0fa9-43b3-9adc-6824be7344e3" />
+  <Project Path="ClienteChatRoom/ClienteChatRoom.csproj" Id="28b801a8-3756-48a7-980a-26d16e9fa6a7" />
+</Solution>
