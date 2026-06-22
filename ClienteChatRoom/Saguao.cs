@@ -50,7 +50,14 @@ namespace ClienteChatRoom
                     int bytes = str.Read(data, 0, data.Length);
                     string message = Encoding.UTF8.GetString(data, 0, bytes);
 
-                    //----- aqui preciso categorizar qual o tipo de mensagem -----//
+                    if (message.StartsWith("LIST:"))
+                    {
+                        this.Invoke(new Action(() => usersOnline(message)));
+                    }
+                    else if (message.StartsWith("INVITE:"))
+                    {
+                        this.Invoke(new Action(() => mostrarConvite(message)));
+                    }
                 }
                 catch
                 {
@@ -69,8 +76,92 @@ namespace ClienteChatRoom
             byte[] data = Encoding.UTF8.GetBytes(msg); //encoda
             _tcpClient.GetStream().Write(data, 0, data.Length);
 
+            //---- exibe o que eu mandei ---//
+
+            listBox1.Items.Add(nickName + ": " + txtMensagem.Text);
             //---- esvazio a txtbox ----//
             txtMensagem.Text = string.Empty;
+        }
+
+        private void mostrarConvite(string convite)
+        {
+            //--------- tiro o cod da mensagem e dou um split -------------//
+            string[] conv = convite.Replace("INVITE:", "").Split(':');
+            string convidou = conv[0];
+
+            //--------- resultado do dialogo criado -------------//
+
+            DialogResult result = MessageBox.Show(convidou + "quer pegar uma onda com você!", "Convite de chat", MessageBoxButtons.YesNo);
+
+            //---------- se o resultado for positivo, crio um novo chat privado ------------//
+            if(result == DialogResult.Yes)
+            {
+                //------- tem q avisar o outro user q aceitou ----------//
+                string reply = "ACCEPT:" + nickName + ":" + convidou;
+                byte[] ar = Encoding.UTF8.GetBytes(reply);
+                _tcpClient.GetStream().Write(ar, 0, ar.Length);
+
+                ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou); //ajeitar o construtor
+
+                //---------- esconde esse form --------//
+                this.Hide();
+
+
+                //-------------------------- qnd fecha o chat privado esse volta -----------------------//
+                //chat.FormClosed += (x, y) =>
+                //{
+                //    this.Show();
+                //};
+                //----------- comentado pra teste do outro jeito pra ver se fica mais limpo ------------//
+
+
+                //-------- mostra o chat pv sozinho ----------//
+                chat.ShowDialog();
+
+
+                //-------- qnd o pv eh fechado esse fica em foco -----//
+                this.Show();
+
+            }
+            else
+            {
+                string rp = "REFUSE:" + nickName + ":" + convidou;
+                byte[] arr = Encoding.UTF8.GetBytes(rp);
+                _tcpClient.GetStream().Write(arr, 0, arr.Length);
+            }
+        }
+
+        private void usersOnline(string usuariosOnline)
+        {
+            //-------------- ele cria um vetor de string onde tira a primeira partezinha de LIST: e depois da um split em cada virgulha -------//
+            string[] users = usuariosOnline.Replace("LIST:", "").Split(',');
+
+            listBox1.Items.Clear();
+
+            //--------- percorre o vetor e adiciona o user na lista de users online --------//
+            foreach (string user in users)
+            {
+                listBox1.Items.Add(user);
+            }
+        }
+
+        private void btnConvidar_Click(object sender, EventArgs e)
+        {
+            //----- caso o user n tenha selecionado ninguem ----//
+            if(listBox1.SelectedItem == null)
+            {
+                MessageBox.Show("Selecione um usuário para teclar :p");
+                return;
+            }
+            else
+            {
+                //----- passa o user que foi selecionado da lista pra string -------//
+                string selecionado = "INVITE:" + nickName + ":" + listBox1.SelectedItem.ToString();
+
+                //------ manda pro servidor ------//
+                byte[] data = Encoding.UTF8.GetBytes(selecionado);
+                _tcpClient.GetStream().Write(data, 0, data.Length);
+            }
         }
     }
 }

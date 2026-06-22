@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatPrivado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChatPrivado.Designer.cs">
+      <DependentUpon>ChatPrivado.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,9 @@
     <Compile Include="Saguao.Designer.cs">
       <DependentUpon>Saguao.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChatPrivado.resx">
+      <DependentUpon>ChatPrivado.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\goldfish_PNG73.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Goldfish-Download-Free-PNG.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\picmix.com_13831573.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

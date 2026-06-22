@@ -31,9 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Saguao));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.txtMensagem = new System.Windows.Forms.TextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnConvidar = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,6 +53,32 @@
             this.txtMensagem.Name = "txtMensagem";
             this.txtMensagem.Size = new System.Drawing.Size(502, 52);
             this.txtMensagem.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            this.listBox1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 17;
+            this.listBox1.Location = new System.Drawing.Point(618, 82);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.ScrollAlwaysVisible = true;
+            this.listBox1.Size = new System.Drawing.Size(170, 310);
+            this.listBox1.TabIndex = 4;
+            // 
+            // btnConvidar
+            // 
+            this.btnConvidar.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnConvidar.BackgroundImage = global::ClienteChatRoom.Properties.Resources.Goldfish_Download_Free_PNG;
+            this.btnConvidar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnConvidar.Font = new System.Drawing.Font("Segoe UI", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConvidar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnConvidar.Location = new System.Drawing.Point(618, 394);
+            this.btnConvidar.Name = "btnConvidar";
+            this.btnConvidar.Size = new System.Drawing.Size(170, 30);
+            this.btnConvidar.TabIndex = 5;
+            this.btnConvidar.Text = "CONVIDAR";
+            this.btnConvidar.UseVisualStyleBackColor = false;
+            this.btnConvidar.Click += new System.EventHandler(this.btnConvidar_Click);
             // 
             // button1
             // 
@@ -75,22 +102,13 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // listBox1
-            // 
-            this.listBox1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 17;
-            this.listBox1.Location = new System.Drawing.Point(618, 82);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(170, 327);
-            this.listBox1.TabIndex = 4;
-            // 
             // Saguao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Bisque;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnConvidar);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtMensagem);
@@ -114,5 +132,6 @@
         private System.Windows.Forms.TextBox txtMensagem;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnConvidar;
     }
 }

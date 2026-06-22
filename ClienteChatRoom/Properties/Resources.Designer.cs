@@ -93,6 +93,16 @@ namespace ClienteChatRoom.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Goldfish_Download_Free_PNG {
+            get {
+                object obj = ResourceManager.GetObject("Goldfish-Download-Free-PNG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap goldfish_PNG73 {
             get {
                 object obj = ResourceManager.GetObject("goldfish_PNG73", resourceCulture);
@@ -116,6 +126,16 @@ namespace ClienteChatRoom.Properties {
         internal static System.Drawing.Bitmap odw0yah4hzwc1__1_ {
             get {
                 object obj = ResourceManager.GetObject("odw0yah4hzwc1 (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap picmix_com_13831573 {
+            get {
+                object obj = ResourceManager.GetObject("picmix.com_13831573", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
