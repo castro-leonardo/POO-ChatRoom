@@ -159,13 +159,18 @@ namespace ChatRoom
                                     if (a != null && b != null)
                                     {
                                         salas.Add(new Privado(a, b));
+                                        string aviso = "ACCEPT:" + invited + ":" + inviter + "|";
+                                        byte[] buff = Encoding.UTF8.GetBytes(aviso);
+                                        b.GetConexao().GetStream().Write(buff, 0, buff.Length);
                                     }
+
+
                                 }
                                 else if (msg.StartsWith("REFUSE:"))
                                 {
                                     string[] s = msg.Split(':');
 
-                                    //0 - ACCEPT | 1 = quem aceitou | 2 - quem pediu
+                                    //0 - REFUSE | 1 = quem aceitou | 2 - quem pediu
                                     string inviter = s[2];
 
                                     //--- supostamente funciona igual o foreach, vou deixar pra testar aqui no refuse ----//

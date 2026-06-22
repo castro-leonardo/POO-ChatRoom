@@ -52,8 +52,10 @@ namespace ClienteChatRoom
                     string messag = Encoding.UTF8.GetString(data, 0, bytes);
                     bffr += messag;
 
+                    //-------- separa as mensagens por split ----------//
                     string[] mensagens = bffr.Split('|');
-
+                     
+                    //------- pra cada parte do vetor de string, ele analisa o que tem q fazer -----//
                     for (int i = 0; i < mensagens.Length - 1; i++)
                     {
                         string message = mensagens[i];
@@ -62,18 +64,41 @@ namespace ClienteChatRoom
                         {
                             this.Invoke(new Action(() => usersOnline(message)));
                         }
+
                         else if (message.StartsWith("MSG:"))
                         {
-                            this.Invoke(new Action(() => {
+                            this.Invoke(new Action(() =>
+                            {
                                 string[] partes = message.Replace("MSG:", "").Split(':');
                                 string nick = partes[0];
                                 string texto = partes[1];
                                 richTextBox1.AppendText(nick + ": " + texto + "\n");
                             }));
                         }
+
                         else if (message.StartsWith("INVITE:"))
                         {
                             this.Invoke(new Action(() => mostrarConvite(message)));
+                        }
+
+                        else if (message.StartsWith("ACCEPT:"))
+
+                        {
+
+                            //------- caso o bate papo privado seja aceito --------//
+                            string[] partes = message.Replace("ACCEPT:", "").Split(':');
+                            string convidou = partes[0];
+
+                            //-------- preciso do invoke pq o OuveServidor ta numa thread secundaria ---------//
+                            this.Invoke(new Action(() =>
+                            {
+                                ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou);
+
+                                this.Hide();
+                                chat.ShowDialog();
+                                this.Show();
+                            }));
+                            
                         }
 
                     }
@@ -120,7 +145,7 @@ namespace ClienteChatRoom
                 byte[] ar = Encoding.UTF8.GetBytes(reply);
                 _tcpClient.GetStream().Write(ar, 0, ar.Length);
 
-                ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou); //ajeitar o construtor
+                ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou);
 
                 //---------- esconde esse form --------//
                 this.Hide();
