@@ -38,7 +38,8 @@ namespace ClienteChatRoom
         {
             //------------ cria a stream pra ouvir ----------//
             NetworkStream str = this._tcpClient.GetStream();
-            byte[] data = new byte[1024];
+            byte[] data = new byte[4096];
+            string bffr = "";
 
             //--------- while pra ficar ouvindo o server continuamente ------------//
             while (true)
@@ -48,16 +49,37 @@ namespace ClienteChatRoom
 
                     //--------- para ler a mensagem ---------//
                     int bytes = str.Read(data, 0, data.Length);
-                    string message = Encoding.UTF8.GetString(data, 0, bytes);
+                    string messag = Encoding.UTF8.GetString(data, 0, bytes);
+                    bffr += messag;
 
-                    if (message.StartsWith("LIST:"))
+                    string[] mensagens = bffr.Split('|');
+
+                    for (int i = 0; i < mensagens.Length - 1; i++)
                     {
-                        this.Invoke(new Action(() => usersOnline(message)));
+                        string message = mensagens[i];
+
+                        if (message.StartsWith("LIST:"))
+                        {
+                            this.Invoke(new Action(() => usersOnline(message)));
+                        }
+                        else if (message.StartsWith("MSG:"))
+                        {
+                            this.Invoke(new Action(() => {
+                                string[] partes = message.Replace("MSG:", "").Split(':');
+                                string nick = partes[0];
+                                string texto = partes[1];
+                                richTextBox1.AppendText(nick + ": " + texto + "\n");
+                            }));
+                        }
+                        else if (message.StartsWith("INVITE:"))
+                        {
+                            this.Invoke(new Action(() => mostrarConvite(message)));
+                        }
+
                     }
-                    else if (message.StartsWith("INVITE:"))
-                    {
-                        this.Invoke(new Action(() => mostrarConvite(message)));
-                    }
+
+                    //------ pra nao processar mensagens incompletas, deixa a ultima pra prox leitura ------//
+                    bffr = mensagens[mensagens.Length - 1];
                 }
                 catch
                 {
@@ -76,9 +98,6 @@ namespace ClienteChatRoom
             byte[] data = Encoding.UTF8.GetBytes(msg); //encoda
             _tcpClient.GetStream().Write(data, 0, data.Length);
 
-            //---- exibe o que eu mandei ---//
-
-            listBox1.Items.Add(nickName + ": " + txtMensagem.Text);
             //---- esvazio a txtbox ----//
             txtMensagem.Text = string.Empty;
         }
@@ -106,15 +125,6 @@ namespace ClienteChatRoom
                 //---------- esconde esse form --------//
                 this.Hide();
 
-
-                //-------------------------- qnd fecha o chat privado esse volta -----------------------//
-                //chat.FormClosed += (x, y) =>
-                //{
-                //    this.Show();
-                //};
-                //----------- comentado pra teste do outro jeito pra ver se fica mais limpo ------------//
-
-
                 //-------- mostra o chat pv sozinho ----------//
                 chat.ShowDialog();
 
@@ -141,7 +151,12 @@ namespace ClienteChatRoom
             //--------- percorre o vetor e adiciona o user na lista de users online --------//
             foreach (string user in users)
             {
-                listBox1.Items.Add(user);
+                string userLimpo = user.Trim();
+
+                if (!string.IsNullOrEmpty(userLimpo)) 
+                {
+                    listBox1.Items.Add(userLimpo);
+                }
             }
         }
 

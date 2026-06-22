@@ -61,7 +61,9 @@ namespace ChatRoom
                     //--------- cria um novo cliente do tipo Cliente ---------//
                     Cliente cliente = new Cliente(Nickname, novoCliente);
                     list.Add(cliente);
+                    Broadcast("MSG:" + Nickname + " se conectou! :D");
                     ListaDeUsuarios();
+
                     // -------- continua esperando por outros clientes --------//
 
                     //---------- thread pra ouvir cada cliente --------//
@@ -200,7 +202,9 @@ namespace ChatRoom
 
         public void Broadcast(string message)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            string msg = message + "|";
+
+            byte[] buffer = Encoding.UTF8.GetBytes(msg);
 
             foreach(Cliente cliente in list)
             {
@@ -210,7 +214,7 @@ namespace ChatRoom
 
         public void ListaDeUsuarios()
         {
-            string message_ = "LIST:" + string.Join(",", list.Select(c => c.GetNome()));
+            string message_ = "LIST:" + string.Join(",", list.Select(c => c.GetNome())) + "|";
 
             /*
             foreach(Cliente cliente in list)
