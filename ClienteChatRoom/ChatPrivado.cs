@@ -144,6 +144,8 @@ namespace ClienteChatRoom
         {
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
                 button1_Click(sender, e);
             }
 
