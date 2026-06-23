@@ -175,7 +175,16 @@ namespace ChatRoom
                                     string inviter = s[2];
 
                                     //--- supostamente funciona igual o foreach, vou deixar pra testar aqui no refuse ----//
-                                    Cliente user1 = list.Find(u => u.GetNome() == inviter);
+                                    // Cliente user1 = list.Find(u => u.GetNome() == inviter);
+                                    Cliente user1 = null;
+
+                                    foreach(var us in list)
+                                    {
+                                        if(inviter == us.GetNome())
+                                        {
+                                            user1 = us;
+                                        }
+                                    }
 
                                     if (user1 != null)
                                     {
