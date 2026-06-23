@@ -192,11 +192,59 @@ namespace ChatRoom
                                         user1.GetConexao().GetStream().Write(buff, 0, buff.Length);
                                     }
                                 }
+                                else if (msg.StartsWith("RETURN:"))
+                                {
+                                    string[] s_ = msg.Replace("|", "").Split(':');
+                                    //0 - refuse | 1 -nickname
+                                    string nick = s_[1];
+
+                                    Cliente a = null;
+
+                                    foreach(var us in list)
+                                    {
+                                        if(us.GetNome() == s_[1])
+                                        {
+                                            a = us;
+                                        }
+                                    }
+
+                                    Privado aux = null;
+                                    Cliente b = null;
+
+                                    foreach(var us in salas)
+                                    {
+                                        if (us.GetCliente_1().Equals(a) || us.GetCliente_2().Equals(a))
+                                        {
+                                            aux = us;
+                                        }
+                                        if (us.GetCliente_1().Equals(a))
+                                        {
+                                            b = us.GetCliente_2();
+                                            aux.SetCliente_2(null);
+                                        }
+                                        else if (us.GetCliente_2().Equals(a))
+                                        {
+                                            b = us.GetCliente_1();
+                                            aux.SetCliente_1(null);
+                                        }
+                                    }
+
+                                    string nickOutro = b.GetNome();
+
+                                    salas.Remove(aux);
+
+                                    string mensagem = "RETURN:" + nick + ":" + nickOutro + "|";
+
+                                    byte[] buff = Encoding.UTF8.GetBytes(mensagem);
+                                    b.GetConexao().GetStream().Write(buff, 0, buff.Length);
+
+                                }
                             }
                             catch
                             {
                                 break;
                             }
+
                         }
 
                         list.Remove(cliente);
@@ -234,14 +282,6 @@ namespace ChatRoom
         public void ListaDeUsuarios()
         {
             string message_ = "LIST:" + string.Join(",", list.Select(c => c.GetNome())) + "|";
-
-            /*
-            foreach(Cliente cliente in list)
-            {
-                message_ += cliente.GetNome();
-                message_ += ",";
-            }
-            */
 
             byte[] buffer = Encoding.UTF8.GetBytes(message_);
 

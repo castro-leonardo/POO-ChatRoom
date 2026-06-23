@@ -97,6 +97,7 @@ namespace ClienteChatRoom
                             //------- caso o bate papo privado seja aceito --------//
                             string[] partes = message.Replace("ACCEPT:", "").Split(':');
                             string convidou = partes[0];
+                            bool c = false;
 
                             //-------- preciso do invoke pq o OuveServidor ta numa thread secundaria ---------//
                             this.Invoke(new Action(() =>
@@ -106,7 +107,23 @@ namespace ClienteChatRoom
                                 this.Hide();
                                 chat.ShowDialog();
                                 this.Show();
+                                c = true;
                             }));
+
+                            if(c == true)
+                            {
+                                string aviso = "RETURN:" + nickName + "|";
+                                byte[] bite = Encoding.UTF8.GetBytes(aviso);
+
+                                _tcpClient.GetStream().Write(bite, 0, bite.Length);
+
+                                this.Invoke(new Action(() =>
+                                {
+                                    MessageBox.Show("Você saiu do castelinho com " + convidou);
+                                }));
+                            }
+
+                            
                         }
                         else if (message.StartsWith("REFUSE:"))
                         {

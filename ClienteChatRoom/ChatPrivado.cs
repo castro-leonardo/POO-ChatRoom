@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -80,7 +81,20 @@ namespace ClienteChatRoom
                                 richTextBox2.ScrollToCaret();
                             }));
                         }
-                        
+                        else if (mensag.StartsWith("RETURN:"))
+                        {
+                            //------- caso outro user saia --------//
+                            string[] partes = mensag.Replace("RETURN:", "").Split(':');
+                            string saiu = partes[0];
+
+                            this.Invoke(new Action(() =>
+                            {
+                                MessageBox.Show(saiu + "Saiu do seu castelinho :( ");
+                                this.Close();
+                            }));
+                            
+                        }
+
                     }
 
                     buffer = mensagem[mensagem.Length - 1];
@@ -90,6 +104,13 @@ namespace ClienteChatRoom
                     return;
                 }
             }
+        }
+
+       private void Chat_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string msg = "RETURN:" + nick_meu + "|";
+            byte[] bt = Encoding.UTF8.GetBytes(msg);
+            client.GetStream().Write(bt, 0, bt.Length);
         }
 
         private void ChatPrivado_Load(object sender, EventArgs e)
