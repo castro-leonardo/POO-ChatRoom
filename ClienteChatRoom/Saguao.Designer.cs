@@ -121,6 +121,7 @@
             this.Name = "Saguao";
             this.Text = "Aquário";
             this.Load += new System.EventHandler(this.Saguao_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

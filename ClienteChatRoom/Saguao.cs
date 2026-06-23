@@ -22,6 +22,7 @@ namespace ClienteChatRoom
             InitializeComponent();
             this._tcpClient = client;
             this.nickName = nick;
+            this.KeyPreview = true;
         }
 
         private void Saguao_Load(object sender, EventArgs e)
@@ -72,7 +73,15 @@ namespace ClienteChatRoom
                                 string[] partes = message.Replace("MSG:", "").Split(':');
                                 string nick = partes[0];
                                 string texto = partes[1];
+                                if(nick == nickName)
+                                {
+                                    richTextBox1.SelectionColor = Color.DarkOrange;
+                                } else
+                                {
+                                    richTextBox1.SelectionColor = Color.Black;
+                                }
                                 richTextBox1.AppendText(nick + ": " + texto + "\n");
+                                richTextBox1.ScrollToCaret();
                             }));
                         }
 
@@ -189,7 +198,14 @@ namespace ClienteChatRoom
 
                 if (!string.IsNullOrEmpty(userLimpo)) 
                 {
-                    listBox1.Items.Add(userLimpo);
+                    if (user == nickName)
+                    {
+                        listBox1.Items.Add("♛ " + userLimpo);
+                    }
+                    else
+                    {
+                        listBox1.Items.Add(userLimpo);
+                    }
                 }
             }
         }
@@ -216,6 +232,14 @@ namespace ClienteChatRoom
                 byte[] data = Encoding.UTF8.GetBytes(selecionado);
                 _tcpClient.GetStream().Write(data, 0, data.Length);
             }
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, e);
+            }
+
         }
     }
 }

@@ -214,7 +214,11 @@ namespace ChatRoom
 
             foreach(Cliente cliente in list)
             {
-                cliente.GetConexao().GetStream().Write(buffer, 0, buffer.Length);
+                bool emSala = salas.Any(s => s.Pertence(cliente));
+                if (!emSala)
+                {
+                    cliente.GetConexao().GetStream().Write(buffer, 0, buffer.Length);
+                }
             }
         }
 

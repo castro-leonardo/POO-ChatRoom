@@ -64,7 +64,17 @@ namespace ClienteChatRoom
                                 string nick = partes[0];
                                 string txt = partes[1];
 
+                                if (nick == nick_meu)
+                                {
+                                    richTextBox2.SelectionColor = Color.Orange;
+                                }
+                                else
+                                {
+                                    richTextBox2.SelectionColor = Color.Black;
+                                }
+
                                 richTextBox2.AppendText(nick + ": " + txt + "\n");
+                                richTextBox2.ScrollToCaret();
                             }));
                         }
                         
@@ -105,6 +115,14 @@ namespace ClienteChatRoom
             client.GetStream().Write(bt, 0, bt.Length);
 
             textBox1.Text = string.Empty;
+        }
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, e);
+            }
+
         }
     }
 }

@@ -123,6 +123,16 @@ namespace ClienteChatRoom.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap internet_explorer_3_0_1996 {
+            get {
+                object obj = ResourceManager.GetObject("internet-explorer-3-0-1996", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap odw0yah4hzwc1__1_ {
             get {
                 object obj = ResourceManager.GetObject("odw0yah4hzwc1 (1)", resourceCulture);

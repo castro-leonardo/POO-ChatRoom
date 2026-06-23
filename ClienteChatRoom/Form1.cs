@@ -17,6 +17,7 @@ namespace ClienteChatRoom
         public Form1()
         {
             InitializeComponent();
+            this.KeyPreview = true;
         }
         private void btnConectar_Click(object sender, EventArgs e)
         {
@@ -77,6 +78,14 @@ namespace ClienteChatRoom
         {
 
         }
-        
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnConectar_Click(sender, e);
+            }
+
+        }
     }
 }
