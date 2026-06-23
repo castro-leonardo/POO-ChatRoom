@@ -52,6 +52,7 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(584, 317);
             this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.TabStop = false;
             this.richTextBox1.Text = "";
             // 
             // txtMensagem
@@ -61,6 +62,7 @@
             this.txtMensagem.Name = "txtMensagem";
             this.txtMensagem.Size = new System.Drawing.Size(502, 52);
             this.txtMensagem.TabIndex = 2;
+            this.txtMensagem.Enter += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 

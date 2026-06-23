@@ -61,6 +61,7 @@
             this.richTextBox2.ReadOnly = true;
             this.richTextBox2.Size = new System.Drawing.Size(584, 317);
             this.richTextBox2.TabIndex = 5;
+            this.richTextBox2.TabStop = false;
             this.richTextBox2.Text = "";
             // 
             // pictureBox1

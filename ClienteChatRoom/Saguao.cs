@@ -161,6 +161,7 @@ namespace ClienteChatRoom
 
             //---- esvazio a txtbox ----//
             txtMensagem.Text = string.Empty;
+            txtMensagem.AcceptsReturn = false;
         }
 
         private void mostrarConvite(string convite)
@@ -253,9 +254,13 @@ namespace ClienteChatRoom
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
                 button1_Click(sender, e);
+
             }
 
         }
