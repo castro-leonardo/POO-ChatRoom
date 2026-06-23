@@ -63,6 +63,76 @@ namespace ClienteChatRoom.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _3GNJKTNW2JPEZEB3KBEWQ3ON62AMGJ5A {
+            get {
+                object obj = ResourceManager.GetObject("3GNJKTNW2JPEZEB3KBEWQ3ON62AMGJ5A", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _4ILKIBJ265HWLSFGA6Q4LOZMTJHPZGMI {
+            get {
+                object obj = ResourceManager.GetObject("4ILKIBJ265HWLSFGA6Q4LOZMTJHPZGMI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _761_7616330_fish_sticker_transparent_background_gold_fish_png {
+            get {
+                object obj = ResourceManager.GetObject("761-7616330_fish-sticker-transparent-background-gold-fish-png", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _761_7616330_fish_sticker_transparent_background_gold_fish_png__1_ {
+            get {
+                object obj = ResourceManager.GetObject("761-7616330_fish-sticker-transparent-background-gold-fish-png (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _7CUUEUEPWBXLT4OFWCVUHVZWYY3RMBGW {
+            get {
+                object obj = ResourceManager.GetObject("7CUUEUEPWBXLT4OFWCVUHVZWYY3RMBGW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _7JDWABQBW6Q4UROSVAKGXMYHFB55XCQI {
+            get {
+                object obj = ResourceManager.GetObject("7JDWABQBW6Q4UROSVAKGXMYHFB55XCQI", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap DKYFRIHYKZR3QCRXCIEOBIZ4CLERAOBU {
+            get {
+                object obj = ResourceManager.GetObject("DKYFRIHYKZR3QCRXCIEOBIZ4CLERAOBU", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap flamingtext_com_366970268 {
             get {
                 object obj = ResourceManager.GetObject("flamingtext_com-366970268", resourceCulture);
@@ -133,6 +203,16 @@ namespace ClienteChatRoom.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LIAG6VRKHJ7GU52WQDD6J4GMYHYDHKVS {
+            get {
+                object obj = ResourceManager.GetObject("LIAG6VRKHJ7GU52WQDD6J4GMYHYDHKVS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap odw0yah4hzwc1__1_ {
             get {
                 object obj = ResourceManager.GetObject("odw0yah4hzwc1 (1)", resourceCulture);
@@ -163,9 +243,49 @@ namespace ClienteChatRoom.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap RMBRTBFHQRDRUVEMCKLXNAC77UBX3A4H {
+            get {
+                object obj = ResourceManager.GetObject("RMBRTBFHQRDRUVEMCKLXNAC77UBX3A4H", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap sealife_8 {
             get {
                 object obj = ResourceManager.GetObject("sealife_8", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap visitorsonline {
+            get {
+                object obj = ResourceManager.GetObject("visitorsonline", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WHWXET76PXB3XGSDFVD34RGZEU3DI3VS {
+            get {
+                object obj = ResourceManager.GetObject("WHWXET76PXB3XGSDFVD34RGZEU3DI3VS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap YFJQMGABXC3GRF2RLR57QDUKC5YU4U4G {
+            get {
+                object obj = ResourceManager.GetObject("YFJQMGABXC3GRF2RLR57QDUKC5YU4U4G", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

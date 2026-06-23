@@ -22,6 +22,7 @@ namespace ClienteChatRoom
             InitializeComponent();
             this._tcpClient = client;
             this.nickName = nick;
+            label2.Text = nick;
             this.KeyPreview = true;
         }
 
@@ -239,6 +240,16 @@ namespace ClienteChatRoom
             {
                 button1_Click(sender, e);
             }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
 
         }
     }

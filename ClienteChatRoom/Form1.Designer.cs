@@ -59,6 +59,8 @@
             // btnConectar
             // 
             this.btnConectar.BackColor = System.Drawing.Color.SandyBrown;
+            this.btnConectar.BackgroundImage = global::ClienteChatRoom.Properties.Resources._761_7616330_fish_sticker_transparent_background_gold_fish_png__1_;
+            this.btnConectar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnConectar.Font = new System.Drawing.Font("Segoe UI Semibold", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConectar.Location = new System.Drawing.Point(96, 383);
             this.btnConectar.Name = "btnConectar";

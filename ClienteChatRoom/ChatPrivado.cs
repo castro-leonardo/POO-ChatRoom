@@ -27,11 +27,14 @@ namespace ClienteChatRoom
 
         public ChatPrivado(TcpClient t, string s, string g)
         {
+            InitializeComponent();
+
             Set_Client(t);
             Set_NickMeu(s);
             Set_NickOutro(g);
 
-            InitializeComponent();
+            label2.Text = s;
+            label3.Text = "Chat Privado Com " + g;
         }
 
         private void OuveServidor_PV()

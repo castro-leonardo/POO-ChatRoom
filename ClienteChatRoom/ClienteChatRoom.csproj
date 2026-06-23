@@ -131,5 +131,41 @@
   <ItemGroup>
     <None Include="Resources\internet-explorer-3-0-1996.gif" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\visitorsonline.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7CUUEUEPWBXLT4OFWCVUHVZWYY3RMBGW.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RMBRTBFHQRDRUVEMCKLXNAC77UBX3A4H.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3GNJKTNW2JPEZEB3KBEWQ3ON62AMGJ5A.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\LIAG6VRKHJ7GU52WQDD6J4GMYHYDHKVS.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DKYFRIHYKZR3QCRXCIEOBIZ4CLERAOBU.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WHWXET76PXB3XGSDFVD34RGZEU3DI3VS.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7JDWABQBW6Q4UROSVAKGXMYHFB55XCQI.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YFJQMGABXC3GRF2RLR57QDUKC5YU4U4G.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\761-7616330_fish-sticker-transparent-background-gold-fish-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\761-7616330_fish-sticker-transparent-background-gold-fish-png %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\4ILKIBJ265HWLSFGA6Q4LOZMTJHPZGMI.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -118,11 +118,56 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="flamingtext_com-366970268" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\flamingtext_com-366970268.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="odw0yah4hzwc1 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\odw0yah4hzwc1 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="3GNJKTNW2JPEZEB3KBEWQ3ON62AMGJ5A" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\3GNJKTNW2JPEZEB3KBEWQ3ON62AMGJ5A.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="images (1) (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images (1) (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="flamingtext_com-366970268" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\flamingtext_com-366970268.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="YFJQMGABXC3GRF2RLR57QDUKC5YU4U4G" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\YFJQMGABXC3GRF2RLR57QDUKC5YU4U4G.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="7CUUEUEPWBXLT4OFWCVUHVZWYY3RMBGW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\7CUUEUEPWBXLT4OFWCVUHVZWYY3RMBGW.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="7JDWABQBW6Q4UROSVAKGXMYHFB55XCQI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\7JDWABQBW6Q4UROSVAKGXMYHFB55XCQI.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="RMBRTBFHQRDRUVEMCKLXNAC77UBX3A4H" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\RMBRTBFHQRDRUVEMCKLXNAC77UBX3A4H.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="visitorsonline" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\visitorsonline.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="761-7616330_fish-sticker-transparent-background-gold-fish-png (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\761-7616330_fish-sticker-transparent-background-gold-fish-png (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sealife_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sealife_8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="goldfish_PNG73" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\goldfish_PNG73.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gfishnet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\gfishnet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DKYFRIHYKZR3QCRXCIEOBIZ4CLERAOBU" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DKYFRIHYKZR3QCRXCIEOBIZ4CLERAOBU.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="internet-explorer-3-0-1996" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\internet-explorer-3-0-1996.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Goldfish-Download-Free-PNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Goldfish-Download-Free-PNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="WHWXET76PXB3XGSDFVD34RGZEU3DI3VS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\WHWXET76PXB3XGSDFVD34RGZEU3DI3VS.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pixilart-drawing" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pixilart-drawing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -130,25 +175,16 @@
   <data name="flamingtext_com-366970268-removebg-preview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\flamingtext_com-366970268-removebg-preview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Goldfish-Download-Free-PNG" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Goldfish-Download-Free-PNG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="goldfish_PNG73" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\goldfish_PNG73.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="sealife_8" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sealife_8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="gfishnet" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\gfishnet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="odw0yah4hzwc1 (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\odw0yah4hzwc1 (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="761-7616330_fish-sticker-transparent-background-gold-fish-png" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\761-7616330_fish-sticker-transparent-background-gold-fish-png.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="picmix.com_13831573" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\picmix.com_13831573.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="internet-explorer-3-0-1996" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\internet-explorer-3-0-1996.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="LIAG6VRKHJ7GU52WQDD6J4GMYHYDHKVS" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LIAG6VRKHJ7GU52WQDD6J4GMYHYDHKVS.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="4ILKIBJ265HWLSFGA6Q4LOZMTJHPZGMI" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\4ILKIBJ265HWLSFGA6Q4LOZMTJHPZGMI.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
