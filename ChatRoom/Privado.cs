@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ChatRoom
 {
@@ -11,6 +12,7 @@ namespace ChatRoom
         //------------------ Classe pras conversas no privado ------------------------//
         private Cliente cliente1;
         private Cliente cliente2;
+        private List<Cliente> clientes_ = new List<Cliente>();
 
         public void SetCliente_1(Cliente c) => this.cliente1 = c;
         public void SetCliente_2(Cliente c) => this.cliente2 = c;
@@ -21,17 +23,22 @@ namespace ChatRoom
         {
             SetCliente_1(c1);
             SetCliente_2(c2);
+
+            clientes_.Add(c1 as Cliente);
+            clientes_.Add(c2 as Cliente);
         }
 
         public bool Pertence(Cliente c) => c == GetCliente_1() || c == GetCliente_2();
         public void PvBroadcast(string Mensagem, Cliente Remetente)
         {
-            //---Ternary  ::: Funciona com Condição ? valor se verdadeiro : valor se falso ---------------//
-            Cliente Destinatario = (Remetente == this.cliente1) ? GetCliente_2() : GetCliente_1();
-            // assim, o destinatario sera o cliente 2 se o remetente foi o 1, e o cliente 1 se o remetente nao for o 1
+            string msg = Mensagem + "|";
 
-            byte[] bfr = Encoding.UTF8.GetBytes(Mensagem);
-            Destinatario.GetConexao().GetStream().Write(bfr, 0 , bfr.Length);
+            byte[] bfr = Encoding.UTF8.GetBytes(msg);
+
+            foreach (Cliente cliente in clientes_)
+            {
+                cliente.GetConexao().GetStream().Write(bfr, 0, bfr.Length);
+            }
 
         }
     }

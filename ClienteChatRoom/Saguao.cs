@@ -82,7 +82,6 @@ namespace ClienteChatRoom
                         }
 
                         else if (message.StartsWith("ACCEPT:"))
-
                         {
 
                             //------- caso o bate papo privado seja aceito --------//
@@ -98,7 +97,17 @@ namespace ClienteChatRoom
                                 chat.ShowDialog();
                                 this.Show();
                             }));
-                            
+                        }
+                        else if (message.StartsWith("REFUSE:"))
+                        {
+                            //------- caso seja rejeitado ---------//
+                            string[] partes = message.Replace("REFUSE:", "").Split(':');
+                            string convidado = partes[0];
+
+                            this.Invoke(new Action(() =>
+                            {
+                                MessageBox.Show(convidado + " não quer nadar com você :(");
+                            }));
                         }
 
                     }
@@ -117,7 +126,7 @@ namespace ClienteChatRoom
         private void button1_Click(object sender, EventArgs e)
         {
             //------------ primeiro eu tenho q saber a mensagem --------------//
-            string msg = "MSG:"+nickName+":"+txtMensagem.Text;
+            string msg = "MSG:"+nickName+":"+txtMensagem.Text+"|";
 
             //----------- stream pra mandar a mensagem -----------//
             byte[] data = Encoding.UTF8.GetBytes(msg); //encoda
@@ -135,13 +144,13 @@ namespace ClienteChatRoom
 
             //--------- resultado do dialogo criado -------------//
 
-            DialogResult result = MessageBox.Show(convidou + "quer pegar uma onda com você!", "Convite de chat", MessageBoxButtons.YesNo);
+            DialogResult result = MessageBox.Show(convidou + " quer pegar uma onda com você!", "Convite de chat", MessageBoxButtons.YesNo);
 
             //---------- se o resultado for positivo, crio um novo chat privado ------------//
             if(result == DialogResult.Yes)
             {
                 //------- tem q avisar o outro user q aceitou ----------//
-                string reply = "ACCEPT:" + nickName + ":" + convidou;
+                string reply = "ACCEPT:" + nickName + ":" + convidou + "|";
                 byte[] ar = Encoding.UTF8.GetBytes(reply);
                 _tcpClient.GetStream().Write(ar, 0, ar.Length);
 
@@ -160,7 +169,7 @@ namespace ClienteChatRoom
             }
             else
             {
-                string rp = "REFUSE:" + nickName + ":" + convidou;
+                string rp = "REFUSE:" + nickName + ":" + convidou + "|";
                 byte[] arr = Encoding.UTF8.GetBytes(rp);
                 _tcpClient.GetStream().Write(arr, 0, arr.Length);
             }
@@ -193,10 +202,15 @@ namespace ClienteChatRoom
                 MessageBox.Show("Selecione um usuário para teclar :p");
                 return;
             }
+            else if (listBox1.SelectedItem.ToString() == nickName)
+            {
+                MessageBox.Show("Ei! Você não pode convidar a si mesmo!");
+                return;
+            }
             else
             {
                 //----- passa o user que foi selecionado da lista pra string -------//
-                string selecionado = "INVITE:" + nickName + ":" + listBox1.SelectedItem.ToString();
+                string selecionado = "INVITE:" + nickName + ":" + listBox1.SelectedItem.ToString() + "|";
 
                 //------ manda pro servidor ------//
                 byte[] data = Encoding.UTF8.GetBytes(selecionado);

@@ -103,7 +103,7 @@ namespace ChatRoom
                                 else if (msg.StartsWith("INVITE:"))
                                 {
                                     //----- pra ver quem mandou e pra quem convidar -----//
-                                    string[] s = msg.Split(':');
+                                    string[] s = msg.Replace("|", "").Split(':');
 
                                     //0 - INVITE | 1 = quem convidou | 2 - quem ta sendo convidado
 
@@ -126,7 +126,8 @@ namespace ChatRoom
                                     //--- se eu achei, eu envio ---//
                                     if (a != null)
                                     {
-                                        byte[] buff = Encoding.UTF8.GetBytes(msg);
+                                        string st = msg + "|";
+                                        byte[] buff = Encoding.UTF8.GetBytes(st);
                                         a.GetConexao().GetStream().Write(buff, 0, buff.Length);
                                     }
 
@@ -134,7 +135,7 @@ namespace ChatRoom
                                 else if (msg.StartsWith("ACCEPT:"))
                                 {
                                     //----- pra ver quem mandou e pra quem convidar -----//
-                                    string[] s = msg.Split(':');
+                                    string[] s = msg.Replace("|", "").Split(':');
 
                                     //0 - ACCEPT | 1 = quem aceitou | 2 - quem pediu
                                     string invited = s[1];
@@ -168,7 +169,7 @@ namespace ChatRoom
                                 }
                                 else if (msg.StartsWith("REFUSE:"))
                                 {
-                                    string[] s = msg.Split(':');
+                                    string[] s = msg.Replace("|", "").Split(':');
 
                                     //0 - REFUSE | 1 = quem aceitou | 2 - quem pediu
                                     string inviter = s[2];
@@ -235,6 +236,18 @@ namespace ChatRoom
             {
                 cliente.GetConexao().GetStream().Write(buffer, 0, buffer.Length);
             }
+
+            //----------- para aparecer na tela do server ------------//
+
+            this.Invoke(new Action(() =>
+            {
+                listBox1.Items.Clear();
+                foreach (Cliente c in list)
+                {
+                    string ip = ((System.Net.IPEndPoint)c.GetConexao().Client.RemoteEndPoint).Address.ToString();
+                    listBox1.Items.Add(c.GetNome() + " - " + ip);
+                }
+            }));
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
