@@ -152,6 +152,8 @@ namespace ClienteChatRoom
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtMensagem.Text)) return;//-- n manda mensagem vazia
+                                                               
             //------------ primeiro eu tenho q saber a mensagem --------------//
             string msg = "MSG:"+nickName+":"+txtMensagem.Text+"|";
 
@@ -219,8 +221,7 @@ namespace ClienteChatRoom
                 {
                     if (user == nickName)
                     {
-                        //listBox1.Items.Add("♛ " + userLimpo);
-                        listBox1.Items.Insert(0, "♛ " + userLimpo);
+                        listBox1.Items.Insert(0, "♛ " + userLimpo); //-- Usuário sempre se ve como primeiro da lista
                     }
                     else
                     {

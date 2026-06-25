@@ -134,6 +134,8 @@ namespace ClienteChatRoom
         //----------- enviar mensagem -----------//
         private void button1_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBox1.Text)) return; //--- evita de mandar mensagem vazia
+
             string mensagem = "MSG:" + nick_meu + ":" + textBox1.Text + "|";
             byte[] bt = Encoding.UTF8.GetBytes(mensagem);
             client.GetStream().Write(bt, 0, bt.Length);
@@ -144,7 +146,7 @@ namespace ClienteChatRoom
         {
             if (e.KeyCode == Keys.Enter)
             {
-                e.Handled = true;
+                //e.Handled = true;
                 e.SuppressKeyPress = true;
                 button1_Click(sender, e);
             }
