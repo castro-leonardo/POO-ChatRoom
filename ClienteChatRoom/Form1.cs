@@ -83,7 +83,6 @@ namespace ClienteChatRoom
         {
             if (e.KeyCode == Keys.Enter)
             {
-                e.Handled = true;
                 e.SuppressKeyPress = true;
                 btnConectar_Click(sender, e);
             }

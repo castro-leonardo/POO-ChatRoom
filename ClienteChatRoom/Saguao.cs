@@ -219,7 +219,8 @@ namespace ClienteChatRoom
                 {
                     if (user == nickName)
                     {
-                        listBox1.Items.Add("♛ " + userLimpo);
+                        //listBox1.Items.Add("♛ " + userLimpo);
+                        listBox1.Items.Insert(0, "♛ " + userLimpo);
                     }
                     else
                     {
@@ -257,7 +258,6 @@ namespace ClienteChatRoom
 
             if (e.KeyCode == Keys.Enter)
             {
-                e.Handled = true;
                 e.SuppressKeyPress = true;
                 button1_Click(sender, e);
 
