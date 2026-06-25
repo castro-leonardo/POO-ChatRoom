@@ -17,6 +17,8 @@ namespace ClienteChatRoom
     {
         private TcpClient _tcpClient;
         private string nickName;
+        private bool escutandoSaguao = true;
+        private bool fechadoPeloServidor = false;
         public Saguao(TcpClient client, string nick)
         {
             InitializeComponent();
@@ -48,6 +50,12 @@ namespace ClienteChatRoom
             {
                 try
                 {
+                    //--- caso nao teja escutando pula rapidinho ------//
+                    if (!escutandoSaguao)
+                    {
+                        Thread.Sleep(100);
+                        continue;
+                    }
 
                     //--------- para ler a mensagem ---------//
                     int bytes = str.Read(data, 0, data.Length);
@@ -56,22 +64,37 @@ namespace ClienteChatRoom
 
                     //-------- separa as mensagens por split ----------//
                     string[] mensagens = bffr.Split('|');
-                     
+
                     //------- pra cada parte do vetor de string, ele analisa o que tem q fazer -----//
                     for (int i = 0; i < mensagens.Length - 1; i++)
                     {
                         string message = mensagens[i];
 
+                        // Ignora mensagens vazias ou brancas
+                        if (string.IsNullOrWhiteSpace(message))
+                            continue;
+
                         if (message.StartsWith("LIST:"))
                         {
-                            this.Invoke(new Action(() => usersOnline(message)));
+                            if (escutandoSaguao && this.IsHandleCreated && !this.IsDisposed)
+                            {
+                                this.Invoke(new Action(() => usersOnline(message)));
+                            }
                         }
 
                         else if (message.StartsWith("MSG:"))
                         {
+                            if (!escutandoSaguao || !this.IsHandleCreated || this.IsDisposed)
+                                continue;
+
                             this.Invoke(new Action(() =>
                             {
+                                if (!escutandoSaguao) return;
+
                                 string[] partes = message.Replace("MSG:", "").Split(':');
+                                if (partes.Length < 2)
+                                    return;
+
                                 string nick = partes[0];
                                 string texto = partes[1];
                                 if(nick == nickName)
@@ -88,7 +111,10 @@ namespace ClienteChatRoom
 
                         else if (message.StartsWith("INVITE:"))
                         {
-                            this.Invoke(new Action(() => mostrarConvite(message)));
+                            if (escutandoSaguao && this.IsHandleCreated && !this.IsDisposed)
+                            {
+                                this.Invoke(new Action(() => mostrarConvite(message)));
+                            }
                         }
 
                         else if (message.StartsWith("ACCEPT:"))
@@ -96,19 +122,30 @@ namespace ClienteChatRoom
 
                             //------- caso o bate papo privado seja aceito --------//
                             string[] partes = message.Replace("ACCEPT:", "").Split(':');
+                            if (partes.Length < 1)
+                                continue;
+
                             string convidou = partes[0];
                             bool c = false;
 
                             //-------- preciso do invoke pq o OuveServidor ta numa thread secundaria ---------//
-                            this.Invoke(new Action(() =>
+                            if (escutandoSaguao && this.IsHandleCreated && !this.IsDisposed)
                             {
-                                ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou);
+                                this.Invoke(new Action(() =>
+                                {
+                                    if (!escutandoSaguao) return;
 
-                                this.Hide();
-                                chat.ShowDialog();
-                                this.Show();
-                                c = true;
-                            }));
+                                    ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou);
+
+                                    escutandoSaguao = false;
+                                    this.Hide();
+                                    chat.ShowDialog();
+
+                                    this.Show();
+                                    escutandoSaguao = true;
+                                    c = true;
+                                }));
+                            }
 
                             if(c == true)
                             {
@@ -117,24 +154,35 @@ namespace ClienteChatRoom
 
                                 _tcpClient.GetStream().Write(bite, 0, bite.Length);
 
-                                this.Invoke(new Action(() =>
+                                if (escutandoSaguao && this.IsHandleCreated && !this.IsDisposed)
                                 {
-                                    MessageBox.Show("Você saiu do castelinho com " + convidou);
-                                }));
+                                    this.Invoke(new Action(() =>
+                                    {
+                                        if (!escutandoSaguao) return;
+                                        MessageBox.Show("Você saiu do castelinho com " + convidou);
+                                    }));
+                                }
                             }
 
-                            
+
                         }
                         else if (message.StartsWith("REFUSE:"))
                         {
                             //------- caso seja rejeitado ---------//
                             string[] partes = message.Replace("REFUSE:", "").Split(':');
+                            if (partes.Length < 1)
+                                continue;
+
                             string convidado = partes[0];
 
-                            this.Invoke(new Action(() =>
+                            if (escutandoSaguao && this.IsHandleCreated && !this.IsDisposed)
                             {
-                                MessageBox.Show(convidado + " não quer nadar com você :(");
-                            }));
+                                this.Invoke(new Action(() =>
+                                {
+                                    if (!escutandoSaguao) return;
+                                    MessageBox.Show(convidado + " não quer nadar com você :(");
+                                }));
+                            }
                         }
 
                     }
@@ -170,6 +218,9 @@ namespace ClienteChatRoom
         {
             //--------- tiro o cod da mensagem e dou um split -------------//
             string[] conv = convite.Replace("INVITE:", "").Split(':');
+            if (conv.Length < 1)
+                return;
+
             string convidou = conv[0];
 
             //--------- resultado do dialogo criado -------------//
@@ -186,6 +237,7 @@ namespace ClienteChatRoom
 
                 ChatPrivado chat = new ChatPrivado(_tcpClient, nickName, convidou);
 
+                escutandoSaguao = false;
                 //---------- esconde esse form --------//
                 this.Hide();
 
@@ -195,6 +247,7 @@ namespace ClienteChatRoom
 
                 //-------- qnd o pv eh fechado esse fica em foco -----//
                 this.Show();
+                escutandoSaguao = true;
 
             }
             else

@@ -106,6 +106,8 @@ namespace ChatRoom
                                     string[] s = msg.Replace("|", "").Split(':');
 
                                     //0 - INVITE | 1 = quem convidou | 2 - quem ta sendo convidado
+                                    if (s.Length < 3)
+                                        continue;
 
                                     string invited = s[2];
 
@@ -138,6 +140,9 @@ namespace ChatRoom
                                     string[] s = msg.Replace("|", "").Split(':');
 
                                     //0 - ACCEPT | 1 = quem aceitou | 2 - quem pediu
+                                    if (s.Length < 3)
+                                        continue;
+
                                     string invited = s[1];
                                     string inviter = s[2];
 
@@ -172,6 +177,9 @@ namespace ChatRoom
                                     string[] s = msg.Replace("|", "").Split(':');
 
                                     //0 - REFUSE | 1 = quem aceitou | 2 - quem pediu
+                                    if (s.Length < 3)
+                                        continue;
+
                                     string inviter = s[2];
 
                                     //--- supostamente funciona igual o foreach, vou deixar pra testar aqui no refuse ----//
@@ -195,48 +203,44 @@ namespace ChatRoom
                                 else if (msg.StartsWith("RETURN:"))
                                 {
                                     string[] s_ = msg.Replace("|", "").Split(':');
-                                    //0 - refuse | 1 -nickname
+                                    //0 - RETURN: | 1 -nickname | 2- outro
+                                    if (s_.Length < 3)
+                                        continue;
+
                                     string nick = s_[1];
+                                    string outro = s_[2];
 
                                     Cliente a = null;
+                                    Cliente b = null;
 
-                                    foreach(var us in list)
+                                    foreach (Cliente us in list)
                                     {
-                                        if(us.GetNome() == s_[1])
+                                        if (us.GetNome().Equals(nick))
                                         {
                                             a = us;
                                         }
+                                        else if(us.GetNome().Equals(outro))
+                                        {
+                                            b = us;
+                                        }
                                     }
 
-                                    Privado aux = null;
-                                    Cliente b = null;
+                                    string mensagem = "RETURN:" + nick + ":" + outro + "|";
 
-                                    foreach(var us in salas)
+                                    byte[] buff = Encoding.UTF8.GetBytes(mensagem);
+
+                                    if (b != null)
+                                    {
+                                        b.GetConexao().GetStream().Write(buff, 0, buff.Length);
+                                    }
+
+                                    foreach (var us in salas.ToList()) //ToList cria uma copia temporaria para nao dar exception
                                     {
                                         if (us.GetCliente_1().Equals(a) || us.GetCliente_2().Equals(a))
                                         {
-                                            aux = us;
-                                        }
-                                        if (us.GetCliente_1().Equals(a))
-                                        {
-                                            b = us.GetCliente_2();
-                                            aux.SetCliente_2(null);
-                                        }
-                                        else if (us.GetCliente_2().Equals(a))
-                                        {
-                                            b = us.GetCliente_1();
-                                            aux.SetCliente_1(null);
+                                            salas.Remove(us);
                                         }
                                     }
-
-                                    string nickOutro = b.GetNome();
-
-                                    salas.Remove(aux);
-
-                                    string mensagem = "RETURN:" + nick + ":" + nickOutro + "|";
-
-                                    byte[] buff = Encoding.UTF8.GetBytes(mensagem);
-                                    b.GetConexao().GetStream().Write(buff, 0, buff.Length);
 
                                 }
                             }

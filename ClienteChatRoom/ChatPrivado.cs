@@ -16,8 +16,11 @@ namespace ClienteChatRoom
     public partial class ChatPrivado : Form
     {
         private TcpClient client;
+        private Thread Escutando;
         private string nick_meu;
         private string nick_outro;
+        private bool fechadoPeloServidor = false;
+        private bool atualizarInterface = true;
 
         public void Set_Client(TcpClient client) => this.client = client;
         public void Set_NickMeu(string meu) => this.nick_meu = meu;
@@ -40,11 +43,12 @@ namespace ClienteChatRoom
 
         private void OuveServidor_PV()
         {
+            
             NetworkStream str = this.client.GetStream();
             byte[] data = new byte[4096];
             string buffer = "";
 
-            while (true)
+            while (atualizarInterface)
             {
                 try
                 {
@@ -58,13 +62,27 @@ namespace ClienteChatRoom
                     {
                         string mensag = mensagem[i];
 
-                        System.Diagnostics.Debug.WriteLine("ChatPrivado recebeu: '" + mensag + "'");
+                        // Ignora mensagens vazias ou brancas
+                        if (string.IsNullOrWhiteSpace(mensag))
+                            continue;
+
+                        System.Diagnostics.Debug.WriteLine("ChatPrivado recebeu: " + mensag);
 
                         if (mensag.StartsWith("MSG:"))
                         {
+                            if (!atualizarInterface || !this.IsHandleCreated || this.IsDisposed)
+                            {
+                                break; // Sai do laço 'for' de mensagens
+                            }
+
                             this.Invoke(new Action(() =>
                             {
+                                if (!atualizarInterface || this.IsDisposed) return;
+
                                 string[] partes = mensag.Replace("MSG:", "").Split(':');
+                                if (partes.Length < 2)
+                                    return;
+
                                 string nick = partes[0];
                                 string txt = partes[1];
 
@@ -85,14 +103,32 @@ namespace ClienteChatRoom
                         {
                             //------- caso outro user saia --------//
                             string[] partes = mensag.Replace("RETURN:", "").Split(':');
+                            // 0 - saiu
+                            if (partes.Length < 1)
+                                continue;
+
                             string saiu = partes[0];
 
-                            this.Invoke(new Action(() =>
+                            atualizarInterface = false;
+                            fechadoPeloServidor = true;
+
+                            if (this.IsHandleCreated && !this.IsDisposed)
                             {
-                                MessageBox.Show(saiu + "Saiu do seu castelinho :( ");
-                                this.Close();
-                            }));
-                            
+                                this.Invoke(new Action(() =>
+                                {
+                                    if (Escutando != null && Escutando.IsAlive)
+                                    {
+                                        try
+                                        {
+                                            Escutando.Join(1000);
+                                        }
+                                        catch { }
+                                    }
+                                    this.Close();
+                                    MessageBox.Show(saiu + " Saiu do seu castelinho :( ");
+                                }));
+                            }
+
                         }
 
                     }
@@ -108,14 +144,11 @@ namespace ClienteChatRoom
 
        private void Chat_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string msg = "RETURN:" + nick_meu + "|";
-            byte[] bt = Encoding.UTF8.GetBytes(msg);
-            client.GetStream().Write(bt, 0, bt.Length);
         }
 
         private void ChatPrivado_Load(object sender, EventArgs e)
         {
-            Thread Escutando = new Thread(OuveServidor_PV);
+            Escutando = new Thread(OuveServidor_PV);
 
             Escutando.IsBackground = true;
             Escutando.Start();
@@ -146,9 +179,23 @@ namespace ClienteChatRoom
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //e.Handled = true;
+                e.Handled = true;
                 e.SuppressKeyPress = true;
                 button1_Click(sender, e);
+            }
+
+        }
+
+        private void ChatPrivado_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+            atualizarInterface = false;
+
+            if (!fechadoPeloServidor)
+            {
+                string msg = "RETURN:" + nick_meu + ":" + nick_outro + "|";
+                byte[] bt = Encoding.UTF8.GetBytes(msg);
+                client.GetStream().Write(bt, 0, bt.Length);
             }
 
         }
