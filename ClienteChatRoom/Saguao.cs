@@ -183,6 +183,19 @@ namespace ClienteChatRoom
                                     MessageBox.Show(convidado + " não quer nadar com você :(");
                                 }));
                             }
+                        } else if (message.StartsWith("JNET:"))
+                        {
+                            string texto = message.Replace("JNET:", "");
+                            //user e mensagem
+
+                            this.Invoke(new Action(() =>
+                            {
+                                if (!escutandoSaguao) return;
+                                richTextBox1.SelectionColor = Color.Gray;
+
+                                richTextBox1.AppendText(texto + "\n");
+                                richTextBox1.ScrollToCaret();
+                            }));
                         }
 
                     }
@@ -198,17 +211,23 @@ namespace ClienteChatRoom
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        public void enviar(string mensagem)
         {
-            if (string.IsNullOrEmpty(txtMensagem.Text)) return;//-- n manda mensagem vazia
-                                                               
             //------------ primeiro eu tenho q saber a mensagem --------------//
-            string msg = "MSG:"+nickName+":"+txtMensagem.Text+"|";
+            string msg = "MSG:" + nickName + ":" + mensagem + "|";
 
             //----------- stream pra mandar a mensagem -----------//
             byte[] data = Encoding.UTF8.GetBytes(msg); //encoda
             _tcpClient.GetStream().Write(data, 0, data.Length);
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMensagem.Text)) return;//-- n manda mensagem vazia
+
+            enviar(txtMensagem.Text);
+            
             //---- esvazio a txtbox ----//
             txtMensagem.Text = string.Empty;
             txtMensagem.AcceptsReturn = false;
@@ -327,6 +346,15 @@ namespace ClienteChatRoom
         private void label2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Saguao_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            string msg = "JNET:" + nickName + ":" + nickName + " foi pescado..." + "|";
+
+            //----------- stream pra mandar a mensagem -----------//
+            byte[] data = Encoding.UTF8.GetBytes(msg); //encoda
+            _tcpClient.GetStream().Write(data, 0, data.Length);
         }
     }
 }

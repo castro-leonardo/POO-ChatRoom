@@ -174,6 +174,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Saguao";
             this.Text = "Aquário";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Saguao_FormClosing);
             this.Load += new System.EventHandler(this.Saguao_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();

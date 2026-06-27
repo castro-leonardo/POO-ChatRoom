@@ -25,6 +25,7 @@ namespace ChatRoom
 {
     public partial class Form1 : Form
     {
+        //-------- lista de clientes conectador & salas privadas --------//
         List<Cliente> list = new List<Cliente>();
         List<Privado> salas = new List<Privado>();
         public Form1()
@@ -61,7 +62,7 @@ namespace ChatRoom
                     //--------- cria um novo cliente do tipo Cliente ---------//
                     Cliente cliente = new Cliente(Nickname, novoCliente);
                     list.Add(cliente);
-                    Broadcast("MSG:" + Nickname + " se conectou! :D");
+                    Broadcast("JNET:" + cliente.GetNome() + " se conectou :D");
                     ListaDeUsuarios();
 
                     // -------- continua esperando por outros clientes --------//
@@ -81,7 +82,6 @@ namespace ChatRoom
                                 int bytesL = str.Read(bffr, 0, bffr.Length);
                                 string msg = Encoding.UTF8.GetString(bffr, 0, bytesL);
 
-
                                 //-------aqui, dependendo do que for a mensagem sobre, vai mudar o que o server faz-----//
                                 if (msg.StartsWith("MSG:"))
                                 {
@@ -100,7 +100,7 @@ namespace ChatRoom
                                     }
 
                                 }
-                                else if (msg.StartsWith("INVITE:"))
+                                else if (msg.StartsWith("INVITE:")) //convidar para um privado
                                 {
                                     //----- pra ver quem mandou e pra quem convidar -----//
                                     string[] s = msg.Replace("|", "").Split(':');
@@ -134,7 +134,7 @@ namespace ChatRoom
                                     }
 
                                 }
-                                else if (msg.StartsWith("ACCEPT:"))
+                                else if (msg.StartsWith("ACCEPT:")) //aceitar chat priv
                                 {
                                     //----- pra ver quem mandou e pra quem convidar -----//
                                     string[] s = msg.Replace("|", "").Split(':');
@@ -162,6 +162,7 @@ namespace ChatRoom
                                         }
                                     }
 
+                                    //------ se os nicknames existirem, faz o convite ------//
                                     if (a != null && b != null)
                                     {
                                         salas.Add(new Privado(a, b));
@@ -172,7 +173,7 @@ namespace ChatRoom
 
 
                                 }
-                                else if (msg.StartsWith("REFUSE:"))
+                                else if (msg.StartsWith("REFUSE:")) //recusar chat priv
                                 {
                                     string[] s = msg.Replace("|", "").Split(':');
 
@@ -200,19 +201,22 @@ namespace ChatRoom
                                         user1.GetConexao().GetStream().Write(buff, 0, buff.Length);
                                     }
                                 }
-                                else if (msg.StartsWith("RETURN:"))
+                                else if (msg.StartsWith("RETURN:")) //sair do chat priv
                                 {
+                                    //---------- recebo quem saiu ---------//
                                     string[] s_ = msg.Replace("|", "").Split(':');
                                     //0 - RETURN: | 1 -nickname | 2- outro
-                                    if (s_.Length < 3)
-                                        continue;
 
+                                    if (s_.Length < 3) continue; //pra evitar erros precisa ser divido em 3 partes 
+
+                                    //----- nicks do chat pv ----//
                                     string nick = s_[1];
                                     string outro = s_[2];
 
                                     Cliente a = null;
                                     Cliente b = null;
 
+                                    //----- achar quem sao os clientes ----//
                                     foreach (Cliente us in list)
                                     {
                                         if (us.GetNome().Equals(nick))
@@ -225,6 +229,7 @@ namespace ChatRoom
                                         }
                                     }
 
+                                    //-------- avisar o outro cliente de quem retornou ------//
                                     string mensagem = "RETURN:" + nick + ":" + outro + "|";
 
                                     byte[] buff = Encoding.UTF8.GetBytes(mensagem);
@@ -241,7 +246,23 @@ namespace ChatRoom
                                             salas.Remove(us);
                                         }
                                     }
+                                }
+                                else if (msg.StartsWith("JNET:"))
+                                {
+                                    Broadcast("JNET:" + cliente.GetNome() + " foi pescado :(");
+                                    /*
+                                    string msgn = msg + "|";
 
+                                    byte[] bufferr = Encoding.UTF8.GetBytes(msgn);
+
+                                    foreach (Cliente c in list.ToList())
+                                    {
+                                        if(c != cliente)
+                                        {
+                                            c.GetConexao().GetStream().Write(bufferr, 0, bufferr.Length);
+                                        }
+                                    }
+                                    */
                                 }
                             }
                             catch
@@ -253,6 +274,7 @@ namespace ChatRoom
 
                         list.Remove(cliente);
                         ListaDeUsuarios();
+
                     });
 
                     OuvirClientes.IsBackground = true;
@@ -267,6 +289,7 @@ namespace ChatRoom
 
         }
 
+        //--------- envia as mensagens ----------//
         public void Broadcast(string message)
         {
             string msg = message + "|";
@@ -278,7 +301,14 @@ namespace ChatRoom
                 bool emSala = salas.Any(s => s.Pertence(cliente));
                 if (!emSala)
                 {
-                    cliente.GetConexao().GetStream().Write(buffer, 0, buffer.Length);
+                    try
+                    {
+                        cliente.GetConexao().GetStream().Write(buffer, 0, buffer.Length);
+                    }
+                    catch
+                    {
+                        break;
+                    }
                 }
             }
         }

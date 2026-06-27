@@ -188,7 +188,6 @@ namespace ClienteChatRoom
 
         private void ChatPrivado_FormClosed(object sender, FormClosedEventArgs e)
         {
-
             atualizarInterface = false;
 
             if (!fechadoPeloServidor)
