@@ -183,8 +183,6 @@ namespace ChatRoom
 
                                     string inviter = s[2];
 
-                                    //--- supostamente funciona igual o foreach, vou deixar pra testar aqui no refuse ----//
-                                    // Cliente user1 = list.Find(u => u.GetNome() == inviter);
                                     Cliente user1 = null;
 
                                     foreach(var us in list)
@@ -250,19 +248,6 @@ namespace ChatRoom
                                 else if (msg.StartsWith("JNET:"))
                                 {
                                     Broadcast("JNET:" + cliente.GetNome() + " foi pescado :(");
-                                    /*
-                                    string msgn = msg + "|";
-
-                                    byte[] bufferr = Encoding.UTF8.GetBytes(msgn);
-
-                                    foreach (Cliente c in list.ToList())
-                                    {
-                                        if(c != cliente)
-                                        {
-                                            c.GetConexao().GetStream().Write(bufferr, 0, bufferr.Length);
-                                        }
-                                    }
-                                    */
                                 }
                             }
                             catch

@@ -14,10 +14,13 @@ namespace ChatRoom
         private Cliente cliente2;
         private List<Cliente> clientes_ = new List<Cliente>();
 
+        //----- setters & getters ----//
         public void SetCliente_1(Cliente c) => this.cliente1 = c;
         public void SetCliente_2(Cliente c) => this.cliente2 = c;
         public Cliente GetCliente_1() => this.cliente1;
         public Cliente GetCliente_2() => this.cliente2;
+
+        //----- construtor -----//
 
         public Privado(Cliente c1, Cliente c2)
         {
@@ -28,6 +31,7 @@ namespace ChatRoom
             clientes_.Add(c2 as Cliente);
         }
 
+        //----- metodos -----//
         public bool Pertence(Cliente c) => c == GetCliente_1() || c == GetCliente_2();
         public void PvBroadcast(string Mensagem, Cliente Remetente)
         {

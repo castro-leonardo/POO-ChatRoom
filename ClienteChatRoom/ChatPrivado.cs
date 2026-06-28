@@ -65,8 +65,7 @@ namespace ClienteChatRoom
                         // Ignora mensagens vazias ou brancas
                         if (string.IsNullOrWhiteSpace(mensag))
                             continue;
-
-                        System.Diagnostics.Debug.WriteLine("ChatPrivado recebeu: " + mensag);
+                        
 
                         if (mensag.StartsWith("MSG:"))
                         {

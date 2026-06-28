@@ -15,16 +15,30 @@ namespace ClienteChatRoom
 {
     public partial class Saguao : Form
     {
+        //--- atributos ---//
         private TcpClient _tcpClient;
         private string nickName;
         private bool escutandoSaguao = true;
         private bool fechadoPeloServidor = false;
+
+        //--- setters & getters ---//
+
+        public void Set_client(TcpClient tcpClient) => this._tcpClient = tcpClient;
+        public void Set_Nickname(string nick) => this.nickName = nick;
+        public void Set_Escutando(bool e) => this.escutandoSaguao = e;
+        public void Set_Fechado(bool f) => this.fechadoPeloServidor = false;
+
+        public TcpClient GetClient() => this._tcpClient;
+        public string GetNickname() => this.nickName;
+        public bool GetEscutando() => this.escutandoSaguao;
+        public bool GetFechado() => this.fechadoPeloServidor;
+
         public Saguao(TcpClient client, string nick)
         {
             InitializeComponent();
-            this._tcpClient = client;
-            this.nickName = nick;
-            label2.Text = nick;
+            Set_client(client);
+            Set_Nickname(nick);
+            label2.Text = GetNickname();
             this.KeyPreview = true;
         }
 
@@ -140,6 +154,8 @@ namespace ClienteChatRoom
                                     escutandoSaguao = false;
                                     this.Hide();
                                     chat.ShowDialog();
+
+                                    //---- espera fechar o pv ---//
 
                                     this.Show();
                                     escutandoSaguao = true;
